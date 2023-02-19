@@ -328,7 +328,7 @@ function buildDataIndexTailoredSeparateArrays<R>(data: R[], columns: Col<any>[])
     return dataIndexed
 }
 
-function buildDataIndexTailoredSeparateArraysScalar2<R>(data: R[], columns: Col<any>[]): DataIndex<R> {
+function buildDataIndexTailoredSeparateArraysUnroll2<R>(data: R[], columns: Col<any>[]): DataIndex<R> {
     const portfolioRows: { [nameOrEmpty: string]: NonNullable<R>[] } = {}
     const campaignRows: { [nameOrEmpty: string]: NonNullable<R>[] } = {}
     const adGroupRows: { [nameOrEmpty: string]: NonNullable<R>[] } = {}
@@ -557,7 +557,7 @@ function buildDataIndexTailoredSeparateArraysScalar2<R>(data: R[], columns: Col<
     return dataIndexed
 }
 
-function buildDataIndexTailoredSeparateArraysScalar2Indexes<R>(data: R[], columns: Col<any>[]): DataIndexLight {
+function buildDataIndexTailoredSeparateArraysUnroll2Indexes<R>(data: R[], columns: Col<any>[]): DataIndexLight {
     const portfolioIndexes: { [nameOrEmpty: string]: number[] } = {}
     const campaignIndexes: { [nameOrEmpty: string]: number[] } = {}
     const adGroupIndexes: { [nameOrEmpty: string]: number[] } = {}
@@ -789,47 +789,43 @@ function buildDataIndexTailoredSeparateArraysScalar2Indexes<R>(data: R[], column
 }
 
 function benchBuildDataIndex() {
-    const CPUgHz = 3.2
-
-    console.log('User-supplied hz:', CPUgHz, 'gHz')
     gc!()
     {
-        const { result: _result, time: time } = measure(CPUgHz, rows, columns, benchCallBuildDataIndex)
+        const { result: _result, time: time } = measure(rows, columns, benchCallBuildDataIndex)
         console.log('buildDataIndex Time: ', Math.round(time / 1000000).toString(), 'millis')
     }
     gc!()
     {
-        const { result: _result, time: time } = measure(CPUgHz, rows, columns, benchCallBuildDataIndexUnroll2)
-        console.log('buildDataIndexScalar2 Time: ', Math.round(time / 1000000).toString(), 'millis')
+        const { result: _result, time: time } = measure(rows, columns, benchCallBuildDataIndexUnroll2)
+        console.log('benchCallBuildDataIndexUnroll2 Time: ', Math.round(time / 1000000).toString(), 'millis')
     }
     gc!()
     {
-        const { result: _result, time: time } = measure(CPUgHz, rows, columns, buildDataIndexTailored)
+        const { result: _result, time: time } = measure(rows, columns, buildDataIndexTailored)
         console.log('buildDataIndexTailored Time: ', Math.round(time / 1000000).toString(), 'millis')
     }
     gc!()
     {
-        const { result: _result, time: time } = measure(CPUgHz, rows, columns, buildDataIndexTailoredSeparateArrays)
+        const { result: _result, time: time } = measure(rows, columns, buildDataIndexTailoredSeparateArrays)
         console.log('buildDataIndexTailoredSeparateArrays Time: ', Math.round(time / 1000000).toString(), 'millis')
     }
     gc!()
     {
-        const { result: _result, time: time } = measure(CPUgHz, rows, columns, buildDataIndexTailoredSeparateArraysScalar2)
-        console.log('buildDataIndexTailoredSeparateArraysScalar2 Time: ', Math.round(time / 1000000).toString(), 'millis')
+        const { result: _result, time: time } = measure(rows, columns, buildDataIndexTailoredSeparateArraysUnroll2)
+        console.log('buildDataIndexTailoredSeparateArraysUnroll2 Time: ', Math.round(time / 1000000).toString(), 'millis')
     }
     gc!()
     {
-        const { result: _result, time: time } = measure(CPUgHz, rows, columns, buildDataIndexTailoredSeparateArraysScalar2Indexes)
-        console.log('buildDataIndexTailoredSeparateArraysScalar2Indexes Time: ', Math.round(time / 1000000).toString(), 'millis')
+        const { result: _result, time: time } = measure(rows, columns, buildDataIndexTailoredSeparateArraysUnroll2Indexes)
+        console.log('buildDataIndexTailoredSeparateArraysUnroll2Indexes Time: ', Math.round(time / 1000000).toString(), 'millis')
     }
 }
 
 type Measurements<R> = {
     result: R,
     time: number,
-    cycles: number,
 }
-const measure = <R>(CPUgHz: number, rows: BenchRow[], columns: Col<any>[], fn: (rows: BenchRow[], columns: Col<any>[]) => R) => {
+const measure = <R>(rows: BenchRow[], columns: Col<any>[], fn: (rows: BenchRow[], columns: Col<any>[]) => R) => {
     const tryCount = 100
     let time = Infinity
     let result: R | undefined = undefined
@@ -840,11 +836,9 @@ const measure = <R>(CPUgHz: number, rows: BenchRow[], columns: Col<any>[], fn: (
         const currTime = Number(endTime - startTime)
         time = Math.min(currTime, time)
     }
-    const cycles = Number(time) * CPUgHz
     const measurements: Measurements<R> = {
         result: result as R,
         time: time,
-        cycles,
     }
     return measurements
 }
