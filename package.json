@@ -1,0 +1,18 @@
+{
+    "name": "optimizations",
+    "version": "1.0.0",
+    "private": true,
+    "description": "",
+    "engines": {
+        "node": ">=19.0.0"
+    },
+    "devDependencies": {
+        "@types/node": "^18.11.9",
+        "@tsconfig/node-lts-strictest-esm": "^18.12.1",
+        "ts-node": "^10.9.1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "type": "module"
+}
