@@ -20,8 +20,6 @@ type BenchRow = {
 type Col<R> = {
     name: string,
     getValue: (row: R) => string | undefined,
-    compare?: (a: any, b: any) => number,
-    disabled?: boolean,
 }
 
 
