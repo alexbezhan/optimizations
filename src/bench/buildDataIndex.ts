@@ -188,6 +188,92 @@ function buildDataIndexTailored<R>(data: R[], columns: Col<any>[]): DataIndex<R>
     return dataIndexed
 }
 
+function buildDataIndexTailoredDirectAccess(data: BenchRow[], columns: Col<any>[]): DataIndex<BenchRow> {
+    const dataIndexed: DataIndex<BenchRow> = {
+        'portfolio': {},
+        'campaign': {},
+        'adGroup': {},
+        'matchType': {},
+        'searchTerm': {},
+        'color': {},
+        'impressions': {},
+        'clicks': {},
+        'spend': {},
+        'sales': {},
+        'orders': {},
+    }
+    for (let i = 0; i < data.length; i++) {
+        const row = data[i]!
+        {
+            const valueNameOrEmpty = row.portfolio
+            const arrA = dataIndexed[portfolioColumn.name]![valueNameOrEmpty] ?? []
+            arrA.push(row)
+            dataIndexed[portfolioColumn.name]![valueNameOrEmpty] = arrA;
+        }
+        {
+            const valueNameOrEmpty = row.campaign
+            const arrA = dataIndexed[campaignColumn.name]![valueNameOrEmpty] ?? []
+            arrA.push(row)
+            dataIndexed[campaignColumn.name]![valueNameOrEmpty] = arrA;
+        }
+        {
+            const valueNameOrEmpty = row.adGroup
+            const arrA = dataIndexed[adGroupColumn.name]![valueNameOrEmpty] ?? []
+            arrA.push(row)
+            dataIndexed[adGroupColumn.name]![valueNameOrEmpty] = arrA;
+        }
+        {
+            const valueNameOrEmpty = row.matchType
+            const arrA = dataIndexed[matchTypeColumn.name]![valueNameOrEmpty] ?? []
+            arrA.push(row)
+            dataIndexed[matchTypeColumn.name]![valueNameOrEmpty] = arrA;
+        }
+        {
+            const valueNameOrEmpty = row.searchTerm
+            const arrA = dataIndexed[searchTermColumn.name]![valueNameOrEmpty] ?? []
+            arrA.push(row)
+            dataIndexed[searchTermColumn.name]![valueNameOrEmpty] = arrA;
+        }
+        {
+            const valueNameOrEmpty = row.color
+            const arrA = dataIndexed[colorColumn.name]![valueNameOrEmpty] ?? []
+            arrA.push(row)
+            dataIndexed[colorColumn.name]![valueNameOrEmpty] = arrA;
+        }
+        {
+            const valueNameOrEmpty = row.impressions
+            const arrA = dataIndexed[impressionsColumn.name]![valueNameOrEmpty] ?? []
+            arrA.push(row)
+            dataIndexed[impressionsColumn.name]![valueNameOrEmpty] = arrA;
+        }
+        {
+            const valueNameOrEmpty = row.clicks
+            const arrA = dataIndexed[clicksColumn.name]![valueNameOrEmpty] ?? []
+            arrA.push(row)
+            dataIndexed[clicksColumn.name]![valueNameOrEmpty] = arrA;
+        }
+        {
+            const valueNameOrEmpty = row.spend
+            const arrA = dataIndexed[spendColumn.name]![valueNameOrEmpty] ?? []
+            arrA.push(row)
+            dataIndexed[spendColumn.name]![valueNameOrEmpty] = arrA;
+        }
+        {
+            const valueNameOrEmpty = row.sales
+            const arrA = dataIndexed[salesColumn.name]![valueNameOrEmpty] ?? []
+            arrA.push(row)
+            dataIndexed[salesColumn.name]![valueNameOrEmpty] = arrA;
+        }
+        {
+            const valueNameOrEmpty = row.orders
+            const arrA = dataIndexed[ordersColumn.name]![valueNameOrEmpty] ?? []
+            arrA.push(row)
+            dataIndexed[ordersColumn.name]![valueNameOrEmpty] = arrA;
+        }
+    }
+    return dataIndexed
+}
+
 function buildDataIndexTailoredSeparateArrays<R>(data: R[], columns: Col<any>[]): DataIndex<R> {
     const portfolioRows: { [nameOrEmpty: string]: NonNullable<R>[] } = {}
     const campaignRows: { [nameOrEmpty: string]: NonNullable<R>[] } = {}
@@ -801,6 +887,11 @@ function benchBuildDataIndex() {
     {
         const { result: _result, time: time } = measure(rows, columns, buildDataIndexTailored)
         console.log('buildDataIndexTailored Time: ', Math.round(time / 1000000).toString(), 'millis')
+    }
+    gc!()
+    {
+        const { result: _result, time: time } = measure(rows, columns, buildDataIndexTailoredDirectAccess)
+        console.log('buildDataIndexTailoredDirectAccess Time: ', Math.round(time / 1000000).toString(), 'millis')
     }
     gc!()
     {
