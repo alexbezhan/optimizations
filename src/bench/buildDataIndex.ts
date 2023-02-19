@@ -206,69 +206,69 @@ function buildDataIndexTailoredDirectAccess(data: BenchRow[], columns: Col<any>[
         const row = data[i]!
         {
             const valueNameOrEmpty = row.portfolio
-            const arrA = dataIndexed[portfolioColumn.name]![valueNameOrEmpty] ?? []
-            arrA.push(row)
-            dataIndexed[portfolioColumn.name]![valueNameOrEmpty] = arrA;
+            const arr = dataIndexed[portfolioColumn.name]![valueNameOrEmpty] ?? []
+            arr.push(row)
+            dataIndexed[portfolioColumn.name]![valueNameOrEmpty] = arr;
         }
         {
             const valueNameOrEmpty = row.campaign
-            const arrA = dataIndexed[campaignColumn.name]![valueNameOrEmpty] ?? []
-            arrA.push(row)
-            dataIndexed[campaignColumn.name]![valueNameOrEmpty] = arrA;
+            const arr = dataIndexed[campaignColumn.name]![valueNameOrEmpty] ?? []
+            arr.push(row)
+            dataIndexed[campaignColumn.name]![valueNameOrEmpty] = arr;
         }
         {
             const valueNameOrEmpty = row.adGroup
-            const arrA = dataIndexed[adGroupColumn.name]![valueNameOrEmpty] ?? []
-            arrA.push(row)
-            dataIndexed[adGroupColumn.name]![valueNameOrEmpty] = arrA;
+            const arr = dataIndexed[adGroupColumn.name]![valueNameOrEmpty] ?? []
+            arr.push(row)
+            dataIndexed[adGroupColumn.name]![valueNameOrEmpty] = arr;
         }
         {
             const valueNameOrEmpty = row.matchType
-            const arrA = dataIndexed[matchTypeColumn.name]![valueNameOrEmpty] ?? []
-            arrA.push(row)
-            dataIndexed[matchTypeColumn.name]![valueNameOrEmpty] = arrA;
+            const arr = dataIndexed[matchTypeColumn.name]![valueNameOrEmpty] ?? []
+            arr.push(row)
+            dataIndexed[matchTypeColumn.name]![valueNameOrEmpty] = arr;
         }
         {
             const valueNameOrEmpty = row.searchTerm
-            const arrA = dataIndexed[searchTermColumn.name]![valueNameOrEmpty] ?? []
-            arrA.push(row)
-            dataIndexed[searchTermColumn.name]![valueNameOrEmpty] = arrA;
+            const arr = dataIndexed[searchTermColumn.name]![valueNameOrEmpty] ?? []
+            arr.push(row)
+            dataIndexed[searchTermColumn.name]![valueNameOrEmpty] = arr;
         }
         {
             const valueNameOrEmpty = row.color
-            const arrA = dataIndexed[colorColumn.name]![valueNameOrEmpty] ?? []
-            arrA.push(row)
-            dataIndexed[colorColumn.name]![valueNameOrEmpty] = arrA;
+            const arr = dataIndexed[colorColumn.name]![valueNameOrEmpty] ?? []
+            arr.push(row)
+            dataIndexed[colorColumn.name]![valueNameOrEmpty] = arr;
         }
         {
             const valueNameOrEmpty = row.impressions
-            const arrA = dataIndexed[impressionsColumn.name]![valueNameOrEmpty] ?? []
-            arrA.push(row)
-            dataIndexed[impressionsColumn.name]![valueNameOrEmpty] = arrA;
+            const arr = dataIndexed[impressionsColumn.name]![valueNameOrEmpty] ?? []
+            arr.push(row)
+            dataIndexed[impressionsColumn.name]![valueNameOrEmpty] = arr;
         }
         {
             const valueNameOrEmpty = row.clicks
-            const arrA = dataIndexed[clicksColumn.name]![valueNameOrEmpty] ?? []
-            arrA.push(row)
-            dataIndexed[clicksColumn.name]![valueNameOrEmpty] = arrA;
+            const arr = dataIndexed[clicksColumn.name]![valueNameOrEmpty] ?? []
+            arr.push(row)
+            dataIndexed[clicksColumn.name]![valueNameOrEmpty] = arr;
         }
         {
             const valueNameOrEmpty = row.spend
-            const arrA = dataIndexed[spendColumn.name]![valueNameOrEmpty] ?? []
-            arrA.push(row)
-            dataIndexed[spendColumn.name]![valueNameOrEmpty] = arrA;
+            const arr = dataIndexed[spendColumn.name]![valueNameOrEmpty] ?? []
+            arr.push(row)
+            dataIndexed[spendColumn.name]![valueNameOrEmpty] = arr;
         }
         {
             const valueNameOrEmpty = row.sales
-            const arrA = dataIndexed[salesColumn.name]![valueNameOrEmpty] ?? []
-            arrA.push(row)
-            dataIndexed[salesColumn.name]![valueNameOrEmpty] = arrA;
+            const arr = dataIndexed[salesColumn.name]![valueNameOrEmpty] ?? []
+            arr.push(row)
+            dataIndexed[salesColumn.name]![valueNameOrEmpty] = arr;
         }
         {
             const valueNameOrEmpty = row.orders
-            const arrA = dataIndexed[ordersColumn.name]![valueNameOrEmpty] ?? []
-            arrA.push(row)
-            dataIndexed[ordersColumn.name]![valueNameOrEmpty] = arrA;
+            const arr = dataIndexed[ordersColumn.name]![valueNameOrEmpty] ?? []
+            arr.push(row)
+            dataIndexed[ordersColumn.name]![valueNameOrEmpty] = arr;
         }
     }
     return dataIndexed
